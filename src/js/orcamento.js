@@ -1,10 +1,33 @@
+// Criando objeto despesa
+class Despesa {
+    constructor(ano, mes, dia, tipo, descricao, valor) {
+        this.ano = ano
+        this.mes = mes
+        this.dia = dia
+        this.tipo = tipo
+        this.descricao = descricao
+        this.valor = valor
+    }
+}
+
+// Cadastrando Despesas
 function cadastrarDespesa() {
 
-    document.getElementById('ano')
-    document.getElementById('mes')
-    document.getElementById('dia')
-    document.getElementById('tipo')
-    document.getElementById('descricao')
-    document.getElementById('valor')
+    let ano = document.getElementById('ano')
+    let mes = document.getElementById('mes')
+    let dia = document.getElementById('dia')
+    let tipo = document.getElementById('tipo')
+    let descricao = document.getElementById('descricao')
+    let valor = document.getElementById('valor')
 
+    let despesa = new Despesa(
+        ano.value,
+        mes.value,
+        dia.value,
+        tipo.value,
+        descricao.value,
+        valor.value
+    )
+
+    console.log(despesa)
 }
