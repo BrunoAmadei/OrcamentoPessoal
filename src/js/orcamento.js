@@ -10,17 +10,51 @@ class Despesa {
     }
 }
 
+class Bd {
+    constructor() {
+        const id = localStorage.getItem('id')
+
+        if (id === null) {
+            id = 0
+        }
+    }
+    // Próximo Id
+    getProximoId() {
+        const proximoId = localStorage.getItem('id')
+        return parseInt(proximoId) + 1
+    }
+
+    // Salvando despesas 
+    gravar(d) {
+
+        let id = localStorage.getItem('id')
+
+        if (id === null) {
+            id = 0
+        } else {
+            id = this.getProximoId()
+        }
+
+        localStorage.setItem(id, JSON.stringify(d))
+
+        localStorage.setItem('id', id)
+
+
+    }
+}
+const bd = new Bd
+
 // Cadastrando Despesas
 function cadastrarDespesa() {
 
-    let ano = document.getElementById('ano')
-    let mes = document.getElementById('mes')
-    let dia = document.getElementById('dia')
-    let tipo = document.getElementById('tipo')
-    let descricao = document.getElementById('descricao')
-    let valor = document.getElementById('valor')
+    const ano = document.getElementById('ano')
+    const mes = document.getElementById('mes')
+    const dia = document.getElementById('dia')
+    const tipo = document.getElementById('tipo')
+    const descricao = document.getElementById('descricao')
+    const valor = document.getElementById('valor')
 
-    let despesa = new Despesa(
+    const despesa = new Despesa(
         ano.value,
         mes.value,
         dia.value,
@@ -29,5 +63,7 @@ function cadastrarDespesa() {
         valor.value
     )
 
-    console.log(despesa)
+    bd.gravar(despesa)
 }
+
+
