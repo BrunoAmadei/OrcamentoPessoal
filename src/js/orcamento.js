@@ -11,7 +11,7 @@ class Despesa {
 
     validarDados() {
         for (const i in this) {
-            if(this[i] == '' || this[i] == undefined || this[i] == null){
+            if (this[i] == undefined || this[i] == '' || this[i] == null) {
                 return false
             }
         }
@@ -25,34 +25,25 @@ class Bd {
         const id = localStorage.getItem('id')
 
         if (id === null) {
-            id = 0
+            localStorage.setItem('id', 0)
         }
     }
-    // Próximo Id
+
     getProximoId() {
         const proximoId = localStorage.getItem('id')
         return parseInt(proximoId) + 1
     }
 
-    // Salvando despesas 
     gravar(d) {
-
-        let id = localStorage.getItem('id')
-
-        if (id === null) {
-            id = 0
-        } else {
-            id = this.getProximoId()
-        }
+        const id = this.getProximoId()
 
         localStorage.setItem(id, JSON.stringify(d))
 
         localStorage.setItem('id', id)
-
-
     }
 }
-const bd = new Bd
+
+const bd = new Bd()
 
 // Cadastrando Despesas
 function cadastrarDespesa() {
@@ -74,11 +65,11 @@ function cadastrarDespesa() {
     )
 
     if (despesa.validarDados()) {
-      //  bd.gravar(despesa)
-      alert('Dados Válidos')
+        bd.gravar(despesa)
+        //dialog de sucesso
+        $('#sucessoGravacao').modal('show')
     } else {
-        alert('Dados Inválidos')
+        //dialog de sucesso
+        $('#erroGravacao').modal('show')
     }
 }
-
-
