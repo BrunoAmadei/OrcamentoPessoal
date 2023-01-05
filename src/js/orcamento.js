@@ -8,8 +8,18 @@ class Despesa {
         this.descricao = descricao
         this.valor = valor
     }
+
+    validarDados() {
+        for (const i in this) {
+            if(this[i] == '' || this[i] == undefined || this[i] == null){
+                return false
+            }
+        }
+        return true
+    }
 }
 
+// Criando Bd e indices dinamicos
 class Bd {
     constructor() {
         const id = localStorage.getItem('id')
@@ -63,7 +73,12 @@ function cadastrarDespesa() {
         valor.value
     )
 
-    bd.gravar(despesa)
+    if (despesa.validarDados()) {
+      //  bd.gravar(despesa)
+      alert('Dados Válidos')
+    } else {
+        alert('Dados Inválidos')
+    }
 }
 
 
