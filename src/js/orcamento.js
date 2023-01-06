@@ -194,13 +194,11 @@ function listaDespesas(despesas = Array(), filtro = false) {
         btn.innerHTML = '<i class="fas fa-times" />'
         btn.id = `id_despesa_${d.id}`
         btn.onclick = function () {
-
             let id = this.id.replace('id_despesa_', '')
             bd.remover(id)
 
             window.location.reload()
         }
-
         linha.insertCell(4).append(btn)
     })
 

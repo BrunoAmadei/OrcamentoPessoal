@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orçamento Pessoal - Consulta</title>
 
+    <link rel="shortcut icon" href="src/images/favicon-32x32.png" type="image/x-icon">
     <!-- Bootstrap início -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -151,26 +152,20 @@
         </div>
     </div>
     <!-- Modal-->
-    <div class="modal fade" id="registroDepesa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
+    <div class="modal fade" id="registroDespesa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-
             <div class="modal-content">
-
-                <div id="caixaTitulo">
-
-                    <h5 class="modal-title" id="tituloModal"></h5>
-
+                <div id="modal-header">
+                    <h5 class="modal-title" id="titulo_modal"> <!-- script --></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-
                 </div>
-                <div class="modal-body" id="textoModal">
-
+                <div class="modal-body" id="texto-modal">
+                    <!-- script -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" id="butaoModal"></button>
+                    <button type="button" id="btn_modal" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
