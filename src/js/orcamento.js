@@ -181,6 +181,10 @@ function listaDespesas(despesas = Array(), filtro = false) {
         linha.insertCell(1).innerHTML = d.tipo
         linha.insertCell(2).innerHTML = d.descricao
         linha.insertCell(3).innerHTML = d.valor
+
+        // botão de exclusão 
+        const btn = document.createElement('button')
+        linha.insertCell(4).append(btn)
     })
 
 }
