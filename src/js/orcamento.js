@@ -57,13 +57,45 @@ class Bd {
             if (despesa == null) {
                 continue
             }
-            
+
             despesas.push(despesa)
         }
         return despesas
     }
-}
 
+    // Pesquisando dados salvos
+    pesquisar(despesa) {
+
+        let despesasFiltradas = Array()
+        despesasFiltradas = this.carregarRegistro()
+
+        //ano
+        if (despesa.ano != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.ano == despesa.ano)
+        }
+        //mes
+        if (despesa.mes != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.mes == despesa.mes)
+        }
+        //dia
+        if (despesa.dia != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.dia == despesa.dia)
+        }
+
+        //tipo
+        if (despesa.tipo != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.tipo == despesa.tipo)
+        }
+        //descricao
+        if (despesa.descricao != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.descricao == despesa.descricao)
+        }
+        //valor
+        if (despesa.valor != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.valor == despesa.valor)
+        }
+    }
+}
 const bd = new Bd()
 
 // Cadastrando Despesas
@@ -95,6 +127,15 @@ function cadastrarDespesa() {
         document.getElementById('texto-modal').innerHTML = 'Despesa salva com sucesso.'
         document.getElementById('btn_modal').className = 'btn btn-success'
         $('#registroDespesa').modal('show')
+
+        // limpando campos
+        ano.value = ''
+        mes.value = ''
+        dia.value = ''
+        tipo.value = ''
+        descricao.value = ''
+        valor.value = ''
+
     } else {
         //dialog de erro
         document.getElementById('modal-header').className = 'modal-header text-danger'
@@ -107,10 +148,50 @@ function cadastrarDespesa() {
 
 // Carregando despesas
 function listaDespesas() {
-   
+
     let despesas = Array()
-    
+
     despesas = bd.carregarRegistro()
 
-    console.log(despesas)
+    const listaDespesas = document.getElementById('listaDespesas')
+
+    //percorrendo array e listando dinamicamente
+    despesas.forEach(d => {
+
+        // criando linhas da tabela
+        const linha = listaDespesas.insertRow()
+
+        // criando colunas da tabela
+        linha.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`
+
+        // ajustando tipo
+        switch (parseInt(d.tipo)) {
+            case 1: d.tipo = 'Alimentação'
+                break
+            case 2: d.tipo = 'Educação'
+                break
+            case 3: d.tipo = 'Lazer'
+                break
+            case 4: d.tipo = 'Saúde'
+                break
+            case 5: d.tipo = 'Transporte'
+                break
+        }
+        linha.insertCell(1).innerHTML = d.tipo
+        linha.insertCell(2).innerHTML = d.descricao
+        linha.insertCell(3).innerHTML = d.valor
+    })
+}
+
+function pesquisarDespesa() {
+    const ano = document.getElementById('ano').value
+    const mes = document.getElementById('mes').value
+    const dia = document.getElementById('dia').value
+    const tipo = document.getElementById('tipo').value
+    const descricao = document.getElementById('descricao').value
+    const valor = document.getElementById('valor').value
+
+    const despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
+
+    bd.pesquisar(despesa)
 }
