@@ -41,6 +41,27 @@ class Bd {
 
         localStorage.setItem('id', id)
     }
+
+    // Recuperando dados salvos
+    carregarRegistro() {
+
+        const despesas = Array()
+
+        const id = localStorage.getItem('id')
+
+        for (let i = 1; i <= id; i++) {
+            // retornando despesa como objeto 
+            const despesa = JSON.parse(localStorage.getItem(i))
+
+            // Pulando itens removidos 
+            if (despesa == null) {
+                continue
+            }
+            
+            despesas.push(despesa)
+        }
+        return despesas
+    }
 }
 
 const bd = new Bd()
@@ -65,7 +86,7 @@ function cadastrarDespesa() {
     )
 
     if (despesa.validarDados()) {
-      
+
         bd.gravar(despesa)
 
         //dialog de sucesso
@@ -82,4 +103,14 @@ function cadastrarDespesa() {
         document.getElementById('btn_modal').className = 'btn btn-danger'
         $('#registroDespesa').modal('show')
     }
+}
+
+// Carregando despesas
+function listaDespesas() {
+   
+    let despesas = Array()
+    
+    despesas = bd.carregarRegistro()
+
+    console.log(despesas)
 }
